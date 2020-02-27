@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useEffect, useState, useCallback } from 'react'
+import Player from '@vimeo/player'
 
-function App() {
+
+export default function VimeoPlayer({ id=null, width='500px', height='', controls=false, autoplay=false, muted=false }) {
+  const container = useRef(document.createElement('div'))
+  const player = useRef()
+  const [ready, setReady] = useState(false)
+  const [noID, setNoID] = useState(false)
+  console.log('here')
+
+  const videoRef = useCallback(node => {
+    if (node !== null) {
+      node.appendChild(container.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!id) {
+      setNoID(true)
+    } else {
+      if (player.current) {
+          container.current = document.createElement('div')
+          setReady(false)
+      }
+      (async () => {
+         player.current = await new Player(container.current, {
+            id: id,
+            width: width,
+            height: height,
+            controls: controls,
+            autoplay: autoplay,
+            muted: muted
+          })
+        setReady(true)
+      })()
+    }
+  }, [id, width, height, controls, autoplay, muted])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {ready &&
+        <div ref={videoRef}></div>
+      }
+      {noID &&
+        <p>Invalid video ID. Failed to initialize player.</p>
+      }
     </div>
-  );
+  )
 }
-
-export default App;
