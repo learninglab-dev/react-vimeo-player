@@ -2,12 +2,23 @@ import React, { useRef, useEffect, useState, useCallback } from 'react'
 import Player from '@vimeo/player'
 
 
-export default function VimeoPlayer({ id=null, width='500px', height='', controls=false, autoplay=false, muted=false }) {
+export default function VimeoPlayer({
+  id=null,
+  width='500px',
+  height='',
+  controls=false,
+  autoplay=false,
+  muted=false,
+  play=false,
+  pause=false,
+  getTime=false,
+  setTime=null
+  }) {
+
   const container = useRef(document.createElement('div'))
   const player = useRef()
   const [ready, setReady] = useState(false)
   const [noID, setNoID] = useState(false)
-  console.log('here')
 
   const videoRef = useCallback(node => {
     if (node !== null) {
@@ -36,6 +47,22 @@ export default function VimeoPlayer({ id=null, width='500px', height='', control
       })()
     }
   }, [id, width, height, controls, autoplay, muted])
+
+  useEffect(() => {
+    if (play) {
+      player.current.play()
+    } else if (pause) {
+      player.current.pause()
+    }
+  }, [play, pause])
+
+  useEffect(() => {
+    if (getTime) {
+      player.current.getCurrentTime().then(secs => {
+        setTime(secs)
+      })
+    }
+  }, [getTime, setTime])
 
   return (
     <div>
