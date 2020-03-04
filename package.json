@@ -1,20 +1,15 @@
 {
   "name": "ll-vimeo-player",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "private": false,
+  "main": "dist/Player.js",
+  "dependencies": {
+    "@vimeo/player": "^2.10.0"
+  },
   "babel": {
     "presets": [
       "@babel/preset-react"
     ]
-  },
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.1",
-    "@testing-library/user-event": "^7.2.1",
-    "@vimeo/player": "^2.10.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-scripts": "3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -40,6 +35,12 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/preset-react": "^7.8.3"
+    "@babel/preset-react": "^7.8.3",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.1",
+    "@testing-library/user-event": "^7.2.1",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-scripts": "3.4.0"
   }
 }

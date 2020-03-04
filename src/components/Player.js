@@ -10,7 +10,6 @@ export default function VimeoPlayer({
   autoplay=false,
   muted=false,
   play=false,
-  pause=false,
   getTime=false,
   setTime=null
   }) {
@@ -49,12 +48,14 @@ export default function VimeoPlayer({
   }, [id, width, height, controls, autoplay, muted])
 
   useEffect(() => {
-    if (play) {
-      player.current.play()
-    } else if (pause) {
-      player.current.pause()
+    if (player.current !== undefined) {
+      if (play) {
+        player.current.play()
+      } else {
+        player.current.pause()
+      }
     }
-  }, [play, pause])
+  }, [play])
 
   useEffect(() => {
     if (getTime) {

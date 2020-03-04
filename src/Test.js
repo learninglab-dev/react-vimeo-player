@@ -3,7 +3,7 @@ import Player from './components/Player'
 
 
 export default function Test() {
-  const [play, setPlay] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
   const [pause, setPause] = useState(false)
   const [getTime, setGetTime] = useState(false)
   const [time, setTime] = useState(null)
@@ -17,14 +17,12 @@ export default function Test() {
 
   return (
     <div>
-      <Player id={371234010} play={play} pause={pause} getTime={getTime} setTime={timestampTest} />
+      <Player id={371234010} play={isPlaying} getTime={getTime} setTime={timestampTest} />
       <button onClick={() => {
-        setPlay(true)
-        setPause(false)
+        setIsPlaying(true)
         }}>play</button>
       <button onClick={() => {
-        setPause(true)
-        setPlay(false)
+        setIsPlaying(false)
         }}>pause</button>
       <button onClick={() => setGetTime(true)}>get time stamp</button>
     </div>
